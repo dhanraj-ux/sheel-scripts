@@ -1,0 +1,15 @@
+multiple user creation in same name using foor loop range between 6 to 10
+
+#!/bin/bash
+echo "Enter the username"
+read us
+for ((i=6;i<=10;i++))
+do
+useradd $us$i
+echo "Below are details of user $us$i"
+grep $us$i /etc/passwd
+echo "$us$i" |passwd "$us$i" --stdin
+echo "Below are details of password set or not for user $us$i"
+grep "$us$i" /etc/shadow
+echo "========================================"
+done
