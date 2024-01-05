@@ -1,0 +1,27 @@
+file checking in server and file is not present in the server create new filw as per user input
+
+#!/bin/bash
+echo "Enter the file complete path"
+read fi
+if [[ -f $fi ]]
+then
+echo "file $fi exists"
+else
+echo "file $fi not present in the server"
+echo "  Enter "yes" to create a file"
+read opt
+if [[ $opt == "yes" ]]
+then
+echo "User confirm to create a new $fi"
+touch $fi
+if [[ -f $fi ]]
+then
+echo "file $fi got created sucessfully and post user confirmation"
+stat $fi
+else
+echo " file $fi is not created successfully then due to permission issues"
+fi
+else
+echo "user not confirmed t create $fi"
+fi
+fi
