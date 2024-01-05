@@ -1,0 +1,17 @@
+division and multiplication based on input numbet
+
+#!/bib/bash
+echo "Enter the input number1"
+read p
+echo "Entered input number $p"
+echo "Enter the input number2"
+read a
+echo "Entered input numberd $a"
+if [[ $a -gt $p ]]
+then
+c=$(($a*$p))
+echo "sum of number $a $p is $c"
+else
+d=$(($p/$a))
+echo "subtraction of number $a and $p is $d"
+fi
