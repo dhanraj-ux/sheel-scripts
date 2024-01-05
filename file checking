@@ -1,0 +1,75 @@
+file checking the full path and incase of weather file is not present in the server create new file and give the user permission to access
+
+
+#!/bin/bash
+echo "Enter the file complete path"
+read fil
+if [[ -f $fil ]]
+then
+echo "File $fil exsists"
+else
+echo "File $fil doesnt exsists"
+echo "Enter 'yes' to create file"
+read opt
+if [[ $opt == "yes" ]]
+then
+echo "User confirmed to create file $fil"
+touch $fil
+if [[ -f $fil ]]
+then
+echo "File $fil got created successfully post user confirmation"
+stat $fil
+echo "Enter the content1"
+read con1
+echo "Enter the content2"
+read con2
+echo -e "$con1\n$con2">> $fil
+echo "Below are the content of file $fil"
+cat $fil
+echo -e "Enter '1' to know the size of file\n'2' to know inode of file\n'3' to chage the permission of file\n'4' to change the owner of file\n'5'to change groupname of file\n'6' to compress the file\n'7' to copy the file\n'8' to change permission owner group"
+read usropt
+if [[ $usropt -eq 1 ]]
+then
+du -sh $fil
+elif [[ $usropt -eq 2 ]]
+then
+ls -litr $fil
+elif [[ $usropt -eq 3 ]]
+then
+ls -ltr $fil
+echo "Enter the new permission of file"
+read per
+chmod $per $fil
+ls -ltr $fil
+elif [[ $usropt -eq 4 ]]
+then
+ls -ltr $fil
+echo "Enter the new owner of file"
+read own
+chown $own $fil
+ls -ltr $fil
+elif [[ $usropt -eq 5 ]]
+then
+ls -ltr $fil
+echo "Enter the newgroup of file"
+read grp
+chgrp $grp $fil
+ls -ltr $fil
+elif [[ $usropt -eq 6 ]]
+then
+gzip $fil
+ls -ltr $fil.gz
+elif [[ $usropt -eq 7 ]]
+then
+echo "ENTER THE DESTINATION PATH WITH FILENAME"
+read des
+cp -v $fil $des
+ls -ltr $des
+fi
+else
+echo "File $fil not created successfully due to permission issue"
+fi
+else
+echo "User not confirmed to create file $fil"
+fi
+fi
