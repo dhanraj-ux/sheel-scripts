@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "Enter the content to checked"
+read p
+echo "Enter the path  to check which files contains $p under this path"
+read pa
+cof=$(grep -l $p $pa/* |wc -l)
+if [[ $cof -gt 0 ]]
+then
+echo "Below are files which contains $p under the path $pa"
+grep -l $p $pa/*
+else
+echo "None of files contains $p under the path $pa"
+fi
